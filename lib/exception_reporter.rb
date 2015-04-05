@@ -6,7 +6,4 @@ require 'clock'
 require 'bus'
 
 require 'exception_reporter/monitor'
-
-# module ExceptionReporter
-#   # Your code goes here...
-# end
+require 'exception_reporter/payload'
