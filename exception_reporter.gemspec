@@ -22,4 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'logger'
   spec.add_dependency 'dependency'
+  spec.add_dependency 'null_attr'
+  spec.add_dependency 'attribute'
+
 end
