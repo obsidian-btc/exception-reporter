@@ -3,12 +3,12 @@ require_relative './spec_helper'
 describe ExceptionReporter::Payload do
 
   it 'builds from a message' do
-    assert ExceptionReporter::Payload.build(exception)
+    expect {ExceptionReporter::Payload.build(exception)}.to_not raise_error
   end
 
   it 'formats a backtrace' do
-    payload = ExceptionReporter::Payload.new()
-    payload.set_stack_trace(backtrace)
+    payload = ExceptionReporter::Payload.new(exception[:class], exception[:message], backtrace)
+
     expect(payload.hash[:details][:error][:stackTrace]).to eq([
             { lineNumber: "123",  fileName: "/some/folder/some_file.rb", methodName: "some_method_name" },
             { lineNumber: "1234", fileName: "/another/path/foo.rb",      methodName: "block (3 levels) run"}])

@@ -1,9 +1,19 @@
 module ExceptionReporter
   class Payload
-    attr_reader :stack_trace
+    attr_reader :class_name
+    attr_reader :backtrace
+    attr_reader :message
+
+    def initialize(class_name, message, backtrace)
+      @class_name = class_name
+      @message = message
+      @backtrace = backtrace
+    end
 
     def self.build(exception)
-      p exception
+      class_name = exception[:class_name]
+      message =    exception[:message]
+      backtrace =  exception[:backtrace]
     end
 
     def set_stack_trace(backtrace)
@@ -23,13 +33,17 @@ module ExceptionReporter
       }
     end
 
+    def error_details
+      {
+        className:  class_name,
+        message:    message.to_s.encode('UTF-16', :undef => :replace, :invalid => :replace).encode('UTF-8'),
+        stackTrace: (backtrace || []).map { |line| stack_trace_for(line) }
+      }
+    end
+
     def hash
       {
-        details: {
-          error: {
-            stackTrace: @stack_trace
-          }
-        }
+        details: {error: error_details }
       }
     end
 
