@@ -3,17 +3,21 @@ module ExceptionReporter
     attr_reader :class_name
     attr_reader :backtrace
     attr_reader :message
+    attr_reader :time
 
-    def initialize(class_name, message, backtrace)
+    def initialize(class_name, message, backtrace, time)
       @class_name = class_name
       @message = message
       @backtrace = backtrace
+      @time = time
     end
 
     def self.build(exception)
-      class_name = exception[:class_name]
-      message =    exception[:message]
-      backtrace =  exception[:backtrace]
+      class_name = exception['class_name']
+      message =    exception['message']
+      backtrace =  exception['backtrace']
+      time =       exception['time']
+      new(class_name, message, backtrace, time)
     end
 
     def set_stack_trace(backtrace)
@@ -43,11 +47,9 @@ module ExceptionReporter
 
     def hash
       {
+        occurredOn: time,
         details: {error: error_details }
       }
     end
-
-    # note lack of "in method name" in this stack trace line
-    # assert_equal expected, @client.send(:stack_trace_for, "/some/folder/some_file.rb:123")
   end
 end
