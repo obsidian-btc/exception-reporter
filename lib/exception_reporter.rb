@@ -2,7 +2,6 @@ require 'dependency'
 Dependency.activate
 
 require 'logger'
-require 'clock'
 require 'bus'
 require 'settings'
 

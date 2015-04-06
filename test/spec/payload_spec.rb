@@ -13,6 +13,14 @@ describe ExceptionReporter::Payload do
             { lineNumber: "1234", fileName: "/another/path/foo.rb",      methodName: "block (3 levels) run"}])
   end
 
+  it 'sets a default time' do
+    mutated_exception = exception.tap do |e|
+      e.delete('time')
+    end
+    payload = ExceptionReporter::Payload.build(mutated_exception)
+    expect(payload.hash[:time]).to_not be_empty
+  end
+
   it 'sets the occurredOn' do
     expect(payload.hash[:occurredOn]).to eq("2015-04-06T02:41:00.887Z")
   end
