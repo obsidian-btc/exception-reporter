@@ -30,6 +30,29 @@ This library expects a config file in `./settings/exception_reporter.json` with 
 }
 ```
 
+It is then started (the address that it is listening on is the argument to the `Monitor`) via:
+
+```
+ExceptionReporter::Monitor.start('exception')
+```
+
+And looks for exceptions with the format of:
+
+```ruby
+{
+  :time=>"2015-04-06T02:41:00.887Z",
+  :type=>'ZeroDivisionError',
+  :message=>"divided by 0",
+  :backtrace=>[
+    "org/jruby/RubyFixnum.java:559:in `/'",
+    "(irb):6:in `evaluate'",
+    "org/jruby/RubyKernel.java:1101:in `eval'",
+    "/Users/litch/.rbenv/versions/jruby-1.7.15/lib/ruby/2.0/irb/workspace.rb:86:in `evaluate'",
+    "/Users/litch/.rbenv/versions/jruby-1.7.15/lib/ruby/2.0/irb/context.rb:380:in `evaluate'"
+  ]
+}
+```
+
 
 ## Contributing
 
