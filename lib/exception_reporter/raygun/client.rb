@@ -1,12 +1,19 @@
 module ExceptionReporter
   module Raygun
     class Client
+
+      setting :api_key
+
       attr_reader :payload
       attr_reader :client
 
       def initialize(payload, client)
         @payload = payload
         @client = client
+      end
+
+      def request_payload
+        payload.to_json
       end
 
       def !
@@ -18,26 +25,34 @@ module ExceptionReporter
           end
         end
 
-        request.put_header('X-ApiKey', 'SomeEvent')
-        request.put_header('Accept', 'application/vnd.eventstore.atom+json')
-        request.put_header('Content-Length', payload.length)
+        request.put_header('X-ApiKey', api_key)
+        request.put_header('Content-Length', request_payload.length.to_json)
         request.put_header('Content-Type', 'application/json')
-        request.write_str(payload)
+        puts "Sending a payload!"
+        puts request_payload
+        request.write_str(request_payload)
 
         request.end
+      end
+
+      def self.build(payload)
+        new(payload, client).tap do |instance|
+          settings = ExceptionReporter::Settings.instance
+          settings.set(instance, 'raygun')
+        end
       end
 
       def self.!(payload)
         logger = Logger.get self
         logger.info "Posting exception: #{payload}"
-        new(payload, client).!
+        instance = build(payload)
+        instance.!
       end
 
       def self.client
         @client ||= Vertx::HttpClient.new.tap do |client|
           p "Initializing Client"
           client.host = 'api.raygun.io'
-          client.ssl = true
         end
       end
     end

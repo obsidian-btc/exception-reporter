@@ -1,6 +1,6 @@
 # ExceptionReporter
 
-TODO: Write a gem description
+This can be used to register a handler on a Vert.X EventBus for exception reporting.  Exceptions should be published on the EventBus, and this will send them on to [Raygun](raygun.io).
 
 ## Installation
 
@@ -20,7 +20,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This library expects a config file in `./settings/exception_reporter.json` with the format:
+
+```json
+{
+  "raygun": {
+    "api_key": "your-api-key"
+  }
+}
+```
+
 
 ## Contributing
 

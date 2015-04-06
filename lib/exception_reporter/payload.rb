@@ -13,7 +13,7 @@ module ExceptionReporter
     end
 
     def self.build(exception)
-      class_name = exception['class_name']
+      class_name = exception['type']
       message =    exception['message']
       backtrace =  exception['backtrace']
       time =       exception['time']

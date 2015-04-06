@@ -13,5 +13,6 @@ prox_gem 'attribute'
 prox_gem 'null_attr'
 prox_gem 'clock'
 prox_gem 'bus'
+prox_gem 'settings'
 
 gem 'rspec', '~> 3.2.0'
