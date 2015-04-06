@@ -16,7 +16,7 @@ module ExceptionReporter
       class_name = exception['type']
       message =    exception['message']
       backtrace =  exception['backtrace']
-      time =       exception['time']
+      time =       exception['time'] || Time.now.utc.iso8601(3)
       new(class_name, message, backtrace, time)
     end
 
