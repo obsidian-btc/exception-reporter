@@ -4,6 +4,7 @@ Dependency.activate
 require 'logger'
 require 'bus'
 require 'settings'
+require 'clock'
 
 Settings.activate
 
