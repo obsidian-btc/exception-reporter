@@ -9,9 +9,12 @@ gemspec
 
 prox_gem 'dependency'
 prox_gem 'logger'
-prox_gem 'attribute'
-prox_gem 'null_attr'
 prox_gem 'bus'
 prox_gem 'settings'
+
+# Indirect dependencies
+prox_gem 'clock'
+prox_gem 'attribute'
+prox_gem 'null_attr'
 
 gem 'rspec', '~> 3.2.0'

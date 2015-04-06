@@ -18,7 +18,7 @@ describe ExceptionReporter::Payload do
       e.delete('time')
     end
     payload = ExceptionReporter::Payload.build(mutated_exception)
-    expect(payload.hash[:time]).to_not be_empty
+    expect(payload.hash[:occurredOn]).to_not be_nil
   end
 
   it 'sets the occurredOn' do

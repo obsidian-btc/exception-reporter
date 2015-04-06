@@ -44,7 +44,7 @@ module ExceptionReporter
       body = message.body
       logger.trace "Handling exception (Message: #{body}, Handler: #{handler_id})"
 
-      p payload = ExceptionReporter::Payload.build(body).hash
+      payload = ExceptionReporter::Payload.build(body).hash
       ExceptionReporter::Raygun::Client.!(payload)
 
       logger.debug "Handled exception"

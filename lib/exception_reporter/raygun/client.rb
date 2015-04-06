@@ -51,7 +51,8 @@ module ExceptionReporter
 
       def self.client
         @client ||= Vertx::HttpClient.new.tap do |client|
-          p "Initializing Client"
+          logger = Logger.get self
+          logger.info "Initializing Client"
           client.host = 'api.raygun.io'
         end
       end
