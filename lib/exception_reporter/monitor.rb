@@ -7,7 +7,7 @@ module ExceptionReporter
     attr_reader :handler_id
 
     dependency :bus, Bus
-    dependency :logger, Logger
+    dependency :logger, Telemetry::Logger
 
     def initialize(address)
       @address = address
@@ -16,7 +16,7 @@ module ExceptionReporter
     def self.build(address)
       new(address).tap do |instance|
         Bus.configure instance
-        Logger.configure instance
+        Telemetry::Logger.configure instance
       end
     end
 

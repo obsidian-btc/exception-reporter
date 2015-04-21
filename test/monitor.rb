@@ -1,6 +1,6 @@
 require_relative 'test_init'
 
-logger = Logger.register 'Test Output'
+logger = Telemetry::Logger.get 'Test Output'
 bus = Bus.build
 
 logger.info 'Starting the exception reporter monitor test'
