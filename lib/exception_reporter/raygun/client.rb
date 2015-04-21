@@ -43,7 +43,7 @@ module ExceptionReporter
       end
 
       def self.!(payload)
-        logger = Logger.get self
+        logger = Telemetry::Logger.get self
         logger.info "Posting exception: #{payload}"
         instance = build(payload)
         instance.!
@@ -51,7 +51,7 @@ module ExceptionReporter
 
       def self.client
         @client ||= Vertx::HttpClient.new.tap do |client|
-          logger = Logger.get self
+          logger = Telemetry::Logger.get self
           logger.info "Initializing Client"
           client.host = 'api.raygun.io'
         end

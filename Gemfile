@@ -8,7 +8,7 @@ source 'https://rubygems.org'
 gemspec
 
 prox_gem 'dependency'
-prox_gem 'logger'
+prox_gem 'telemetry_logger'
 prox_gem 'bus'
 prox_gem 'settings'
 
