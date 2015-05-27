@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'telemetry_logger'
   spec.add_dependency 'dependency'
-  spec.add_dependency 'null_attr'
+  spec.add_dependency 'subst_attr'
   spec.add_dependency 'attribute'
   spec.add_dependency 'settings'
 
