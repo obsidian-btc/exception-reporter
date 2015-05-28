@@ -64,4 +64,4 @@ And looks for exceptions with the format of:
 
 ## License
 
-The `exception-reporter` library is released under the [MIT License](https://github.com/obsidian-btc/exception-reporter/blob/master/MIT-License.txt).
+The `exception_reporter` library is released under the [MIT License](https://github.com/obsidian-btc/exception-reporter/blob/master/MIT-License.txt).
