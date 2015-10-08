@@ -16,7 +16,7 @@ module ExceptionReporter
         payload.to_json
       end
 
-      def !
+      def call
         request = client.post('/entries') do |resp|
           puts "got response #{resp.status_code}"
           resp.body_handler do |body|
@@ -34,6 +34,7 @@ module ExceptionReporter
 
         request.end
       end
+      alias :! :call # TODO: Remove deprecated actuator [Kelsey, Thu Oct 08 2015]
 
       def self.build(payload)
         new(payload, client).tap do |instance|
@@ -42,12 +43,13 @@ module ExceptionReporter
         end
       end
 
-      def self.!(payload)
+      def self.call(payload)
         logger = Telemetry::Logger.get self
         logger.info "Posting exception: #{payload}"
         instance = build(payload)
-        instance.!
+        instance.()
       end
+      class << self; alias :! :call; end # TODO: Remove deprecated actuator [Kelsey, Thu Oct 08 2015]
 
       def self.client
         @client ||= Vertx::HttpClient.new.tap do |client|
